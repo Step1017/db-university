@@ -33,3 +33,8 @@ WHERE `level` = 'magistrale';
 /* 7. Da quanti dipartimenti è composta l'università? (12) */
 SELECT COUNT(`id`) AS `departments_num` /* uso AS per dare un nome custom  alla mia colonna ('id') */
 FROM `departments`;
+
+/* 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50) */
+SELECT COUNT(`id`) AS `teachers_no_phone_num`
+FROM `teachers`
+WHERE `phone` IS NULL;
