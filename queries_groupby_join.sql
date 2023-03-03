@@ -22,18 +22,19 @@ GROUP BY `department_id`;
 
 /* Query con JOIN: */
 /* 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia */
-SELECT `students`.`name`, `students`.`surname`, `degrees`.`name`
+SELECT students.id, students.surname, students.name, students.registration_number, students.enrolment_date, degrees.name AS degree_name
 FROM `students`
-JOIN `degrees`
-ON `degrees`.`id` = `students`.`degree_id`
-WHERE `degrees`.`name` = 'Corso di Laurea in Economia';
+JOIN degrees
+ON students.degree_id = degrees.id
+WHERE degrees.name = 'Corso di Laurea in Economia';
 
 /* 2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze */
-SELECT `degrees`.`name`
+SELECT degrees.id, degrees.name, degrees.level, departments.name AS department_name 
 FROM `degrees`
-JOIN `departments`
-ON `department_id` = `degrees`.`departments_id`
-WHERE `departments`.`name` = 'Dipartimento di Neuroscienze';
+JOIN departments
+ON degrees.department_id = departments.id
+WHERE degrees.level = 'Magistrale'
+AND departments.name = 'Dipartimento di Neuroscienze';
 
 /* 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44) */
 SELECT courses.id, courses.name, courses.period, courses.year, courses.cfu, courses.degree_id, course_teacher.teacher_id
