@@ -54,3 +54,14 @@ JOIN departments
 ON degrees.department_id = departments.id
 ORDER BY students.surname, students.name;
 
+/* 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti */ 
+SELECT degrees.id, degrees.name, courses.name AS corso, teachers.surname AS cognome_insegnante, teachers.name AS nome_insegnante
+FROM `degrees`
+JOIN courses
+ON degrees.id = courses.degree_id
+JOIN course_teacher
+ON courses.id = course_teacher.course_id
+JOIN teachers
+ON course_teacher.teacher_id = teachers.id
+ORDER BY degrees.id ASC;
+
