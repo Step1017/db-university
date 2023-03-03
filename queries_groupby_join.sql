@@ -78,3 +78,14 @@ JOIN departments
 ON degrees.department_id = departments.id
 WHERE departments.name = 'Dipartimento di Matematica'
 ORDER BY teachers.id;
+
+/* 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami */
+SELECT students.id, students.surname, students.name, students.registration_number, students.enrolment_date, COUNT(exam_student.exam_id) AS num_tentativi, MAX(exam_student.vote) AS voto_massimo
+FROM `students`
+JOIN exam_student
+ON students.id = exam_student.student_id
+JOIN exams
+ON exam_student.exam_id = exams.id
+GROUP BY exams.course_id, students.id, students.surname, students.name, students.registration_number, students.enrolment_date
+HAVING voto_massimo >= 18
+ORDER BY `voto_massimo` ASC;
